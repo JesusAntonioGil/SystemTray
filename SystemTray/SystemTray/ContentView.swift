@@ -7,17 +7,40 @@
 
 import SwiftUI
 
+
+enum CurrentView {
+    case actions
+    case periods
+}
+
+
 struct ContentView: View {
+    @State private var show: Bool = false
+    @State private var currentView: CurrentView = .actions
+    
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Button("Show Trat View") {
+            show.toggle()
         }
-        .padding()
+        .systemTrayView($show) {
+            Text("Hello From Tray")
+                .frame(maxWidth: .infinity)
+                .frame(height: 300)
+        }
+    }
+    
+    
+    @ViewBuilder
+    private func View1() -> some View {
+        VStack(spacing: 12) {
+            HStack {
+                Text("Choose description")
+            }
+        }
     }
 }
+
 
 #Preview {
     ContentView()
